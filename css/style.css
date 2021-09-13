@@ -1,0 +1,147 @@
+.ba-logo {
+    max-width: 100px;
+}
+
+.ba-header {
+    padding: 40px 20px 60px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-align: center;
+    /* background: url(../img/psp-hero-itunes.image.large_2x.jpg) 50%;  */
+    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, 0.5)), url(../img/music.jpg)/* 50% */
+    ;
+    background-size: cover;
+}
+
+.ba-page-title {
+    font-weight: 400;
+    margin: 0;
+}
+
+.ba-page-subtitle {
+    font-weight: 200;
+}
+
+.centered-form {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+form.ba-search-form {
+    max-width: 500px;
+    margin: 0 auto 30px !important;
+    padding: 30px !important;
+}
+
+
+/* .ba-search-form .input-field {
+    flex-grow: 1;
+    margin: 0 20px 0 0;
+} */
+
+.ba-tunes-list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0px 20px;
+}
+
+@media screen and (min-width:640px) {
+    .ba-tunes-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .ba-tunes-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .ba-tunes-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card .card-image .card-title {
+    margin: 0;
+    right: 0;
+    background: linear-gradient(to top, #000, transparent);
+}
+
+.card .card-content .card-title {
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge i {
+    margin-right: 4px;
+}
+
+.btn-floating i {
+    pointer-events: none;
+}
+
+.btn-floating .pause {
+    display: none;
+}
+
+.btn-floating.pulse .pause {
+    display: block;
+}
+
+.btn-floating.pulse .play {
+    display: none;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card .card-content {
+    flex-grow: 1;
+}
+
+.input-checkbox {
+    padding-top: 20px;
+}
+
+[type="checkbox"]+span:not(.lever) {
+    margin-bottom: -9px;
+    margin-left: 4px;
+}
+
+.quantity-field {
+    max-width: 30px !important;
+}
+
+.no-margin-y {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.end-x-content {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message-results {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    color: rgba(0, 0, 0, 0.7);
+}

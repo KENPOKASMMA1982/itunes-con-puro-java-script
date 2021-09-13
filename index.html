@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>iTunes in BA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.png" />
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+
+</head>
+
+<body>
+    <header class="ba-header ">
+        <img draggable="false" class="ba-logo" src="./favicon.png" alt="iTunes">
+        <h1 class="ba-page-title">iTunes search</h1>
+        <h4 class="ba-page-subtitle">Your music, movies, and TV shows take center stage.</h4>
+    </header>
+
+    <main class="container">
+
+        <div class="row centered-form">
+            <form class="card-panel ba-search-form col s12" data-search>
+                <div class="row ">
+                    <div class="input-field col l10 m9 s8">
+                        <input value="" id="query" type="text" name="query" required class="validate">
+                        <label for="query" class="">Enter tag for search</label>
+                    </div>
+                    <div class="input-field col l2 m3 s4 end-x-content">
+                        <button type="submit" class="btn-floating btn-large waves-effect waves-light pink">
+							<i class="material-icons">search</i>
+						</button>
+                    </div>
+                    <div class="input-field col l10 m9 s8">
+                        <p>
+                            <label>
+                                <input type="checkbox"  id='auto'/>
+                                <span>Cargar automaticamente?</span>
+                            </label>
+                          </p>
+                    </div>
+                </div>
+                <p class="no-margin-y">
+                    Other options
+                    <label>
+						<input value="false" type="checkbox" id="more-options">
+						 <span></span>
+					 </label>
+                </p>
+                <div id="opts-form" class="row d-none">
+                    <div class="col s12">
+                        <div>
+                            <label for="checkbox">Check if you want only one song (singles)</label>
+                            <label>
+								<input value="false" type="checkbox" id="checkbox">
+								 <span></span>
+							 </label>
+
+                            <input class="quantity-field" value="5" min="0" id="quantity" type="text" name="quantity" required class="validate">
+
+                        </div>
+                    </div>
+                    <div class="input-field col s6 no-margin-y">
+                        <input id="start-date" type="text" class="datepicker">
+                        <span class="helper-text">Start date</span>
+                    </div>
+                    <div class="input-field col s6 no-margin-y">
+                        <input id="end-date" type="text" class="datepicker">
+                        <span class="helper-text">End date</span>
+                    </div>
+                </div>
+                <p id="results" class="message-results"></p>
+            </form>
+        </div>
+
+        <div class="divider"></div>
+        <!-- /.divider -->
+        <div class="ba-tunes-list" data-list>
+            <template data-tmpl>
+				<div class="card hoverable">
+					<div class="card-image">
+						<img loading="lazy" src="{{cover}}" alt="{{AlbumName}}">
+						<h3 class="card-title">{{Artist}}</h3>
+						<button data-track-id="{{trackId}}" class="btn-floating btn-large halfway-fab waves-effect waves-light purple">
+							<i class="material-icons play">play_arrow</i>
+							<i class="material-icons pause">pause</i>
+						</button>
+						<audio id="{{trackId}}" src="{{audio}}" ></audio>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">{{SongName}}</h4>
+						<p>Album - {{AlbumName}}</p>
+						<p class="grey-text text-lighten-1">
+							Genre - {{GenreName}}						
+							<span class="new badge blue" data-badge-caption>
+								<i class="material-icons tiny">access_time</i>
+								{{duration}}
+							</span>
+						</p>
+						<p class="grey-text text-lighten-1">
+							Date  {{releaseDate}}
+						</p>		
+						<p class="grey-text text-lighten-1">
+							<span class="new badge blue" data-badge-caption>
+								{{country}}
+							</span>
+						</p>			
+	
+					</div>
+					<div class="card-action">
+						<a href="{{collectionViewUrl}}" target="_blank">
+							<i class="material-icons tiny">shopping_cart</i>	
+							</a>
+					</div>
+				</div>
+				<!-- /.card -->
+			</template>
+        </div>
+        <div id="divMoreData" style="display:none;">
+           <!-- <button id="moreData" type="submit" class="btn-floating btn-large waves-effect waves-light pink">
+				<i class="material-icons">cloud_download</i>
+				<span>Ver Más...</span>
+			</button>-->
+			<button id="moreData" type="submit" class=" btn-large pink">
+				<!--<i class="material-icons">cloud_download</i>-->
+				<span>Ver Más...</span>
+			</button>
+        </div>
+
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+
+                <a class="grey-text text-lighten-4 right" href="#!"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+    </script>
+
+</body>
+
+</html>
