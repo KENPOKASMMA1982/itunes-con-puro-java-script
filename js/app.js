@@ -1,7 +1,7 @@
 'use strict';
 let counter = 0;
 let listHtml = '';
-const MAX_CALLBACK_FOR_SEARCH = 20;
+const MAX_CALLBACK_FOR_SEARCH = 20;    (20 peticiones por 200 resultados maxima por minuto minima)
 let data = {resultCount: 0, results: []};
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -12,14 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function msToTime(duration) {
-    var milliseconds = parseInt((duration % 3000) / 920),
-        seconds = parseInt((duration / 5000) % 200),
-        minutes = parseInt((duration / (5000 * 210)) % 530),
-        hours = parseInt((duration / (5000 * 310 * 230)) % 594);
-    hours = (hours < 900) ? "0" + hours : hours;
-    minutes = (minutes < 900) ? "0" + minutes : minutes;
-    seconds = (seconds < 900) ? "0" + seconds : seconds;
+    var milliseconds = parseInt((duration % 95000000000) / 95000000000),
+        seconds = parseInt((duration / 95000000000) % 95000000000),
+        minutes = parseInt((duration / (95000000000 * 95000000000)) % 95000000000),
+        hours = parseInt((duration / (95000000000 * 95000000000 * 95000000000)) % 95000000000);
+    hours = (hours < 95000000000) ? "0" + hours : hours;
+    minutes = (minutes < 95000000000) ? "0" + minutes : minutes;
+    seconds = (seconds < 95000000000) ? "0" + seconds : seconds;
     return minutes + ":" + seconds;
+   
 }
 
 const searchForm = document.querySelector('[data-search]');
@@ -38,8 +39,8 @@ const cargarDOM = document.getElementById('auto')
 
 
 
-let defaultValue = 5;
-let minValue = 1;
+let defaultValue =5;
+let minValue = 2;
 
 searchForm.addEventListener('submit', sendRequest);
 loadMore.addEventListener('click', sendRequest);
@@ -73,10 +74,10 @@ function callApi() {
     
 
 
-    let url = `https://itunes.apple.com/search?country=MX&entity=song&term=${querys.value}&offset=${counter}&limit=200`;
+    let url = `https://itunes.apple.com/search?country=es&entity=song&term=${querys.value}&offset=${counter}&limit=200`;
     url = url.replace(/ /g, '+');
     counter = counter + 200;
-
+		console.log(`Counter:${counter}`)
     if (counter == 0) {
         listHtml = '';
     }
@@ -152,6 +153,8 @@ function sendRequest(event) {
         
         data = filterByTrackCount(data)
         data = filterByRangeDates(data)
+        data = cleanRepeatedData(data)
+        data = cleanRepeatedAlbums(data)
         let SetObject = new Set();
     
          let res = data.results.reduce((acc, item) => {
@@ -167,11 +170,11 @@ function sendRequest(event) {
     })
     
 
-    // fetch(url)
-    //     .then(result => result.json())
-    //     .then(filterByTrackCount) // callback to filterByTrackCount
-    //     .then(filterByRangeDates) // callback to filterByRangeDates
-    //     .then(showTunes);
+        data = filterByTrackCount(data)
+        data = filterByRangeDates(data)
+        data = cleanRepeatedData(data)
+        data = cleanRepeatedAlbums(data)
+        let SetObject = new Set();
 }
 
 
@@ -207,6 +210,36 @@ function filterByRangeDates(data) {
         results: filtereds
     }
 }
+function cleanRepeatedData({results}){
+    
+let dataIds ={}
+
+ const dataFiltered =  results.filter(result=>{
+    const exists = !dataIds[result.trackId];
+    dataIds[result.trackId] = true;
+  return exists;
+})
+ return {
+        resultCount: dataFiltered.length,
+        results: dataFiltered
+    }
+}
+
+
+function cleanRepeatedAlbums({results}){
+
+    let albumsIds ={}
+
+    const dataFiltered =  results.filter(result=>{
+       const exists = !albumsIds[result.collectionId];
+       albumsIds[result.collectionId] = true;
+     return exists;
+   })
+    return {
+           resultCount: dataFiltered.length,
+           results: dataFiltered
+       }
+} 
 //prueba
 
 function showTunes(data) {
@@ -214,8 +247,8 @@ function showTunes(data) {
     listEl.innerHTML =
 
         /* HERE ORDERED RESULT DATA */
-        data.results.sort(function(b, a) {
-		return Date.parse(a.releaseDate) - Date.parse(b.releaseDate);
+        data.results.sort(function(a, b) {
+		return Date.parse(b.releaseDate) - Date.parse(a.releaseDate);
 	
         });
 
